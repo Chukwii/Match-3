@@ -88,7 +88,8 @@ public class GameOver : MonoBehaviour
 
     public void OnReplayClicked()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        if(PlayerPrefs.GetInt("Lives") > 0)
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
     public void OnDoneClicked()

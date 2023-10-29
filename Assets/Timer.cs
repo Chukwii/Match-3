@@ -14,6 +14,7 @@ public class Timer : MonoBehaviour
     public Text countdownText;
 
 
+
     private void Update()
     {
         timeLeft = PlayerPrefs.GetFloat("timeLeft", timeLeft);
@@ -28,7 +29,9 @@ public class Timer : MonoBehaviour
             else
             {
                 if(GameObject.FindObjectOfType<HUD>() != null)
-                    GameObject.FindObjectOfType<HUD>().lives++;
+                    GameObject.FindObjectOfType<HUD>().livesSub++;
+                if (GameObject.FindObjectOfType<LevelSelect>() != null)
+                    GameObject.FindObjectOfType<LevelSelect>().lives++;
 
                 timeLeft = 120;
             }

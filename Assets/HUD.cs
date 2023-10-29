@@ -16,7 +16,7 @@ public class HUD : MonoBehaviour
     public UnityEngine.UI.Image[] stars;
 
     private int starIdx = 0;
-    public  int lives = 3;
+    public int livesSub;
 
 
     // Start is called before the first frame update
@@ -37,14 +37,13 @@ public class HUD : MonoBehaviour
                 stars[i].gameObject.transform.GetChild(1).GetComponent<UnityEngine.UI.Image>().enabled = false;
             }
         }
-        lives = PlayerPrefs.GetInt("Lives");
+        livesSub = PlayerPrefs.GetInt("Lives");
     }
 
     // Update is called once per frame
     void Update()
     {
-        PlayerPrefs.SetInt("Lives", lives);
-        livesText.text = lives.ToString();
+        livesText.text = livesSub.ToString();
     }
 
     public void SetScore(int score)
@@ -131,8 +130,12 @@ public class HUD : MonoBehaviour
     public void OnGameLose()
     {
         gameOver.ShowLose();
-        if(lives >= 1)
-            lives -= 1;
+        if(PlayerPrefs.GetInt("Lives") >= 1)
+        {
+            livesSub -= 1;
+            PlayerPrefs.SetInt("Lives", livesSub);
+        }
+            
         
         PlayerPrefs.Save();
     }

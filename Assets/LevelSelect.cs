@@ -14,11 +14,15 @@ public class LevelSelect : MonoBehaviour
 
     public ButtonPlayerPrefs[] buttons;
     public Text hTxt;
+    public int lives = 3;
 
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < buttons.Length; i++)
+        PlayerPrefs.SetInt("Lives", lives);
+        lives = PlayerPrefs.GetInt("Lives");
+
+        for (int i = 0; i < buttons.Length; i++)
         {
             int score = PlayerPrefs.GetInt(buttons[i].playerPrefKey, 0);
 
@@ -41,7 +45,8 @@ public class LevelSelect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        hTxt.text = PlayerPrefs.GetInt("Lives").ToString();
+        hTxt.text = lives.ToString();
+        PlayerPrefs.SetInt("Lives", lives);
     }
 
     public void OnButtonPress(string levelName)
